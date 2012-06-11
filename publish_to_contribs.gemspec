@@ -3,21 +3,18 @@ require File.join([File.dirname(__FILE__),'lib','publish_to_contribs_version.rb'
 spec = Gem::Specification.new do |s| 
   s.name = 'publish_to_contribs'
   s.version = PublishToContribs::VERSION
-  s.author = 'Your Name Here'
-  s.email = 'your@email.address.com'
-  s.homepage = 'http://your.website.com'
+  s.author = 'Matt Simpson'
+  s.email = 'matt.simpson@asolutions.com'
+  s.homepage = 'http://github.com/ionicmobile/publish_to_contribs'
   s.platform = Gem::Platform::RUBY
-  s.summary = 'A description of your project'
+  s.summary = 'Publish changes from one repo to another, for a list of repo pairs'
 # Add your other files here if you make them
   s.files = %w(
 bin/publish_to_contribs
   )
   s.require_paths << 'lib'
-  s.has_rdoc = true
-  s.extra_rdoc_files = ['README.rdoc','publish_to_contribs.rdoc']
-  s.rdoc_options << '--title' << 'publish_to_contribs' << '--main' << 'README.rdoc' << '-ri'
+  s.has_rdoc = false
   s.bindir = 'bin'
   s.executables << 'publish_to_contribs'
   s.add_development_dependency('rake')
-  s.add_development_dependency('rdoc')
 end

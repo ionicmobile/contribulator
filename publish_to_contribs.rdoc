@@ -1,5 +1,0 @@
-= publish_to_contribs
-
-Generate this with
-    publish_to_contribs rdoc
-After you have described your command line interface

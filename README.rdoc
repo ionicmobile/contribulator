@@ -1,6 +1,0 @@
-= publish_to_contribs
-
-Describe your project here
-
-:include:publish_to_contribs.rdoc
-
