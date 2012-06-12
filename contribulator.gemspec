@@ -17,4 +17,5 @@ bin/contribulator
   s.executables << 'contribulator'
   s.add_dependency('gli')
   s.add_development_dependency('rake')
+  s.add_development_dependency('bundler')
 end
