@@ -11,6 +11,7 @@ spec = Gem::Specification.new do |s|
 # Add your other files here if you make them
   s.files = %w(
 bin/contribulator
+lib/contribulator_version.rb
   )
   s.require_paths << 'lib'
   s.bindir = 'bin'
