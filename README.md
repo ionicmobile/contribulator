@@ -11,7 +11,9 @@ gem install contribulator
 contribulator publish https://github.com/org/repo
 ```
 
-Pushes the master branch from repo to repo_contrib
+Pushes the master branch from repo to repo_contrib. 
+
+Automate this with Jenkins or a github hook and it's golden!
 
 ### Ignore cached setup
 
