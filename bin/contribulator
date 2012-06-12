@@ -13,6 +13,7 @@ end
 $: << File.expand_path(File.dirname(File.realpath(__FILE__)) + '/../lib')
 require 'rubygems'
 require 'gli'
+require 'digest'
 require 'contribulator_version'
 
 include GLI
@@ -24,8 +25,8 @@ version Contribulator.version
 desc "Publish a repo's master branch to another repo with force"
 command :publish do |c|
   c.action do |global_options, options, args|
-    help_now!('source repo is required') if args.empty?
-    
+    exit_now! 'you must provide the source repo as the first argument', 0 if args.empty?
+
     source_repo = args[0]
     destination_repo = if args[1]
       args[1]
@@ -33,13 +34,46 @@ command :publish do |c|
       stripped_source_repo = source_repo[-4..-1] == '.git' ? source_repo[0..-5] : source_repo
       "#{stripped_source_repo}_contrib"
     end
-    puts %(
-git init .
-git remote add origin #{source_repo}
-git remote add contrib #{destination_repo}
-git fetch
-git push contrib origin/master:master
+    tmp_dir = File.expand_path("../../tmp/#{Digest::SHA256.hexdigest("#{source_repo}_#{destination_repo}")[0..10]}", __FILE__)
+
+    fetch_and_push_command = %(
+git fetch &&
+git push contrib origin/master:master &&
 git push contrib --tags
+    )
+
+    if(File.exists?(tmp_dir))
+      puts "Repos already setup to fetch and push"
+      setup_command = "cd #{tmp_dir} &&"
+      command = setup_command + fetch_and_push_command
+    else
+      puts "Setting up repos to fetch and push"
+      setup_command = %(
+mkdir -p #{tmp_dir} &&
+cd #{tmp_dir} &&
+git init . && 
+git remote add origin #{source_repo} && 
+git remote add contrib #{destination_repo} &&
+      )
+      command = setup_command + fetch_and_push_command        
+    end
+
+    puts %(
+Executing command:
+------------------------------------------
+
+#{command}
+------------------------------------------)
+
+    puts %(
+Output of the command:      
+------------------------------------------
+
+)
+    puts `#{command}`
+    puts %(------------------------------------------
+
+Command Finished.
     )
   end
 end
