@@ -44,6 +44,8 @@ I'd love for you to improve this gem
 1. Branch it
 1. Request a pull
 
+Special thanks to [@davetron5000](https://github.com/davetron5000) for [gli](https://rubygems.org/gems/gli)
+
 ## What's it do?
 
 This, in essence, performs the following, among others:
@@ -56,3 +58,4 @@ git fetch
 git push contrib origin/master:master
 git push contrib --tags
 ```
+
