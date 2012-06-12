@@ -24,6 +24,9 @@ version Contribulator.version
 
 desc "Publish a repo's master branch to another repo with force"
 command :publish do |c|
+  c.desc "Resetup the repositories locally before publishing"
+  c.switch :fresh
+
   c.action do |global_options, options, args|
     exit_now! 'you must provide the source repo as the first argument', 0 if args.empty?
 
@@ -35,6 +38,12 @@ command :publish do |c|
       "#{stripped_source_repo}_contrib"
     end
     tmp_dir = File.expand_path("../../tmp/#{Digest::SHA256.hexdigest("#{source_repo}_#{destination_repo}")[0..10]}", __FILE__)
+
+
+    if options[:fresh]
+      puts "Removing the local clones for this publication\n\n"
+      FileUtils.rm_r(tmp_dir)
+    end
 
     fetch_and_push_command = %(
 git fetch &&
