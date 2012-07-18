@@ -47,7 +47,7 @@ command :publish do |c|
 
     fetch_and_push_command = %(
 git fetch &&
-git push contrib origin/master:master &&
+git push contrib origin/master:master --force &&
 git push contrib --tags
     )
 
